@@ -26,6 +26,28 @@ body {
     color: #555;
 }
 
+.final-score-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 90px;
+    transform: translateX(-50%);
+    text-align: center;
+    
+}
+.final-score-input {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 30px;
+    /* width: 300px; */
+    text-align: center;
+    transition: all .4s;
+}
+.final-score-input:focus {
+    outline: none;
+    padding: 5px 40px;
+}
+
 .wrapper {
     width: 1000px;
     position: absolute;
@@ -144,11 +166,13 @@ i {
 .dice {
     position: absolute;
     left: 50%;
-    top: 178px;
+    top: 210px;
     transform: translateX(-50%);
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
+#dice-1 {top: 100px;}
+
 
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
