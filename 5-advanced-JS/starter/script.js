@@ -93,7 +93,7 @@ interviewQuestion('shit')('Lior');
 
 ////////////////////////////////////////////
 // Closures
-
+/*
 function interviewQ(job) {
     return function(name) {
         if(job === 'designer') {
@@ -106,4 +106,122 @@ function interviewQ(job) {
 }
 var designerInterview = interviewQ('designer');
 designerInterview('Lior');
+*/
 
+////////////////////////////////////
+// Bind, call and apply
+/*
+var jhon = {
+    name:"Jhon",
+    job: "designer",
+    presentestion: function(style, timeOfDay) {
+        if(style === 'formal') {
+            console.log('I\'m ' + this.name + ' ,I\'m ' + this.job + '. Have a good ' + timeOfDay + '.');
+        }
+        else {
+            console.log('Whattshappp??:) my name is ' + this.name + ' ,I\'m ' + this.job + '. Have a Great ' + timeOfDay + ' my Man:).');
+        }
+    }
+};
+var emily = {
+    name:"Emily",
+    job: "teacher"
+}
+console.log(jhon);
+// jhon.presentestion('formal', 'mornings');
+// jhon.presentestion.call(emily,'formal','afternoon');
+
+var formalState = jhon.presentestion.bind(emily,'formal','night');
+
+emily.hara = jhon.presentestion.bind(emily);
+
+emily.hara('formal', 'fucking Morning')
+
+var years = [1961, 1987, 1990, 1910, 2005];
+
+function yearsCalc(arr, fn) {
+    var arrRes = [];
+    for (var i = 0; i < arr.length; i++) {
+        arrRes.push(fn(arr[i]))
+    };
+    return arrRes;
+};
+function ageCalc(el) {
+    return 2018 - el;
+}
+function isFullAge(limit,el) {
+    debugger;
+    return el >= limit;
+};
+var ages = yearsCalc(years, ageCalc)
+var fullJapan = yearsCalc(ages, isFullAge.bind(this, 20))
+console.log(fullJapan)
+*/
+
+
+//////////////////////////////////////////////////
+// A/Q CHALLANGE;
+
+(function () {
+        function Question(question, answers, correct) {
+            this.question = question;
+            this.answers = answers;
+            this.correct = correct;
+        };
+        Question.prototype.displayQ = function () {
+            console.log(this.question);
+            for (var i = 0; i < this.answers.length; i++) {
+                console.log(i + ': ' + this.answers[i])
+
+            };
+        }
+        Question.prototype.checkAnswer = function (answer,callback) {
+            var oz;
+            console.log('================')
+            if (answer === this.correct) {
+                console.log('Correct Answer');
+                oz = callback(true);
+            } else {
+                console.log('Wrong Answer');
+                oz = callback(false);
+            }
+            this.displayScore(oz);
+        }
+        Question.prototype.displayScore = function(score) {
+            console.log('---------------- \n your current Score is '+ score);
+            
+        }
+
+        questions = [
+            new Question('what is my name?', ['Oz', 'Dane', 'Alexy', 'Omer'], 0),
+            new Question('Most Beautiful?', ['Mor', 'Hen', 'Ronit', 'Lior'], 3),
+            new Question('Best software Language in the World', ['Java', 'Python', 'Javascript', 'PHP'], 2)
+        ]; 
+
+        function score() {
+            var sc = 0
+            return function(correct) {
+                if (correct) {
+                    sc++
+                }
+                return sc;
+            }
+        }
+        var keepScore = score();
+
+        function nextQ() {   
+            var n = Math.floor(Math.random() * questions.length);
+    
+                questions[n].displayQ();
+                var answer = prompt('Please Answer the Question below. \n write exit to quit the Game');
+                if (answer !== 'exit') {
+                    questions[n].checkAnswer(parseInt(answer), keepScore);
+                    nextQ();   
+                }
+                else {
+                    alert('Thnak u for playing the Quiz Game, Hope u Enjoy:)');
+                    
+                }
+        }
+        nextQ();
+    })();
