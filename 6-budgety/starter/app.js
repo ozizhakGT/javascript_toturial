@@ -1,6 +1,7 @@
 // BUDGET CONTROLLER
 var budgetController = (function () {
 
+    // Constructors
     var Expense = function(id,description,value) {
         this.id = id;
         this.description = description;
@@ -12,6 +13,7 @@ var budgetController = (function () {
         this.value = value;
     };
 
+    // DATA STRUCTURES
     var data = {
         allItems: {
             exp: [],
@@ -23,6 +25,7 @@ var budgetController = (function () {
         }
     }
 
+    
     return {
         addItem: function(type,des,val) {
             var newItem, ID;
