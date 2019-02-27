@@ -1,5 +1,17 @@
-// Global app controller
+import axios from 'axios';
+// https://www.food2fork.com/api/search
+// API KEY c2c3c64c17cf9b72fd26601d88661d67
 
-import x from './test'
-const hara = 'hara bara';
-console.log(`oz izhak the king ${x} and ${hara}`)
+async function getRecipe(query) {
+    const proxy = 'https://cors-anywhere.herokuapp.com/'
+    const key = 'aaac2c3c64c17cf9b72fd26601d88661d67';
+    try {
+        const res = await axios(`${proxy}https://www.food2fork.com/api/search?key=${key}&q=${query}`);
+        const recipes = res.data.recipes;
+        console.log(recipes)
+    }
+    catch(err) {
+        alert(err)
+    }
+}
+getRecipe('pizza');
