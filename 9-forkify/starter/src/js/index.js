@@ -10,6 +10,7 @@ import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
 import Like from './models/Like';
+import Likes from './models/Like';
 
 /** Global state of the app
 * - Search object
@@ -19,6 +20,17 @@ import Like from './models/Like';
 **/
 const state = {};
 
+
+// Restore Likes recipe when page load
+window.addEventListener('load', () => {
+    state.likes = new Like();
+    state.likes.readStorage();
+    likesView.toggleLikesMenu(state.likes.getNumLikes());
+
+    state.likes.likes.forEach(like => {
+        likesView.renderLike(like)
+    });
+});
 
 /*
 Search Controller;
@@ -128,9 +140,6 @@ const controlList = () => {
         listView.renderItem(item);
     })
 };
-
-state.likes = new Like();
-likesView.toggleLikesMenu(state.likes.getNumLikes());
 // LIKES CONTROLLER
 const controlLike = () => {
     if (!state.likes) {
@@ -204,5 +213,3 @@ elements.recipe.addEventListener('click', e => {
             controlLike();
         }
 });
-
-window.l = new List();
